@@ -48,22 +48,20 @@ const StartUpCard = ({ post }: { post: StartUpTypeCard }) => {
       </div>
 
       <Link href={`/startup/${_id}`}>
-      <p className="startup-card_desc">
-        {description}</p>
+        <p className="startup-card_desc">{description}</p>
 
-        <img src={image} alt="StartUp Image" className="startup-card_img"/>
-    </Link>
+        <img src={image} alt="StartUp Image" className="startup-card_img" />
+      </Link>
 
-    <div className="flex-between gap-3 mt-5">
-        <Link href={`/?query=${category.toLowerCase()}`}>
-            <p className="text-16-medium">{category}</p>
+      <div className="flex-between gap-3 mt-5">
+        <Link href={`/?query=${category || ""}`}>
+          <p className="text-16-medium">{category}</p>
         </Link>
+
         <Button className="startup-card_btn">
-            <Link href={`/startup/${_id}`}>
-                Details
-            </Link>
+          <Link href={`/startup/${_id}`}>Details</Link>
         </Button>
-    </div>
+      </div>
     </li>
   );
 };
