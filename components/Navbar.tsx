@@ -13,7 +13,7 @@ const Navbar = async () => {
           <Image 
             src="/logo1.png" 
             alt="logo" 
-            width={150}  /* Adjusted size */
+            width={100}  /* Adjusted size */
             height={40}  /* Adjusted size */
             className="logo" 
           />
