@@ -54,7 +54,7 @@ const workSans = localFont({
   variable:'--font-work-sans',
 });
 export const metadata: Metadata = {
-  title: "InkVerse",
+  title: "Venturely",
   description: "Fast and easy blogging platform for sharing your ideas.",
 };
 

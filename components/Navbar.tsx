@@ -7,14 +7,14 @@ const Navbar = async () => {
 
   return (
     <header className="px-10 bg-white shadow-sm font-sans">
-      <nav className="flex justify-between items-center h-16">
+      <nav className="flex justify-between items-center h-25">
         {/* Logo */}
         <Link href="/" className="logo-container">
           <Image 
             src="/logo1.png" 
             alt="logo" 
             width={150}  /* Adjusted size */
-            height={55}  /* Adjusted size */
+            height={40}  /* Adjusted size */
             className="logo" 
           />
         </Link>
