@@ -16,8 +16,8 @@ const Navbar = async () => {
           <Image
             src="/logo1.png"
             alt="logo"
-            width={100} /* Adjusted size */
-            height={40} /* Adjusted size */
+            width={150} /* Adjusted size */
+            height={60} /* Adjusted size based on original aspect ratio */
             className="logo"
           />
         </Link>
