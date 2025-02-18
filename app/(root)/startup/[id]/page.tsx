@@ -25,8 +25,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
       slug: "editor-picks",
     }),
   ]);
-console.log("Post Data:", post);
-console.log("Editor Posts Data:", editorPosts);
+// console.log("Post Data:", post);
+// console.log("Editor Posts Data:", editorPosts);
 
   if (!post) {
     return notFound();
