@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { auth, signIn, signOut } from "@/auth";
+import { BadgePlus, LogOut } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = async () => {
   const session = await auth();
@@ -10,12 +13,12 @@ const Navbar = async () => {
       <nav className="flex justify-between items-center h-25">
         {/* Logo */}
         <Link href="/" className="logo-container">
-          <Image 
-            src="/logo1.png" 
-            alt="logo" 
-            width={100}  /* Adjusted size */
-            height={40}  /* Adjusted size */
-            className="logo" 
+          <Image
+            src="/logo1.png"
+            alt="logo"
+            width={100} /* Adjusted size */
+            height={40} /* Adjusted size */
+            className="logo"
           />
         </Link>
 
@@ -24,7 +27,8 @@ const Navbar = async () => {
           {session && session?.user ? (
             <>
               <Link href="/startup/create">
-                <span>Create</span>
+                <span className="max-sm:hidden">Create</span>
+                <BadgePlus className="size-6 sm:hidden" />
               </Link>
 
               <form
@@ -34,12 +38,22 @@ const Navbar = async () => {
                 }}
               >
                 <button type="submit" className="text-red-600 hover:underline">
-                  Logout
+                  <span className="max-sm:hidden">Logout</span>
+                  <LogOut className="size-6 sm:hidden text-red-500" />
                 </button>
               </form>
 
               <Link href={`/user/${session.id}`}>
-                <span>{session?.user?.name}</span>
+                <Avatar className="size-10">
+                  <AvatarImage
+                    className=""
+                    src={session?.user?.image || ""}
+                    alt={session?.user?.name || ""}
+                  />
+                  <AvatarFallback>
+                    <FaUserCircle size={24} />
+                  </AvatarFallback>
+                </Avatar>
               </Link>
             </>
           ) : (

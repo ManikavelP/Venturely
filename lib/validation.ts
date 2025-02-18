@@ -14,7 +14,7 @@ export const formSchema = z.object({
 
         return contentType?.startsWith("image/");
       } catch {
-        return false;
+        return false;   
       }
     }),
   pitch: z.string().min(10),

@@ -1,13 +1,14 @@
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
 import Image from "next/image";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+import { Button } from "@/components/ui/button";
 import { Author, Startup } from "@/sanity/types";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export type StartUpTypeCard = Omit<Startup , "author"> & {author?: Author};
-const StartUpCard = ({ post }: { post: StartUpTypeCard }) => {
+export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
+
+const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   const {
     _createdAt,
     views,
@@ -18,8 +19,9 @@ const StartUpCard = ({ post }: { post: StartUpTypeCard }) => {
     image,
     description,
   } = post;
+
   return (
-    <li className="startup-card group ">
+    <li className="startup-card group">
       <div className="flex-between">
         <p className="startup_card_date">{formatDate(_createdAt)}</p>
         <div className="flex gap-1.5">
@@ -34,14 +36,13 @@ const StartUpCard = ({ post }: { post: StartUpTypeCard }) => {
             <p className="text-16-medium line-clamp-1">{author?.name}</p>
           </Link>
           <Link href={`/startup/${_id}`}>
-            <h3 className="text-26-semibold">{title}</h3>
+            <h3 className="text-26-semibold line-clamp-1">{title}</h3>
           </Link>
         </div>
-
         <Link href={`/user/${author?._id}`}>
           <Image
-            src="https://placehold.co/48x48"
-            alt="placeholder    "
+            src={author?.image!}
+            alt={author?.name!}
             width={48}
             height={48}
             className="rounded-full"
@@ -52,15 +53,14 @@ const StartUpCard = ({ post }: { post: StartUpTypeCard }) => {
       <Link href={`/startup/${_id}`}>
         <p className="startup-card_desc">{description}</p>
 
-        <img src={image} alt="StartUp Image" className="startup-card_img" />
+        <img src={image} alt="placeholder" className="startup-card_img" />
       </Link>
 
       <div className="flex-between gap-3 mt-5">
-        <Link href={`/?query=${category?.toLocaleLowerCase()}`}>
+        <Link href={`/?query=${category?.toLowerCase()}`}>
           <p className="text-16-medium">{category}</p>
         </Link>
-
-        <Button className="startup-card_btn">
+        <Button className="startup-card_btn" asChild>
           <Link href={`/startup/${_id}`}>Details</Link>
         </Button>
       </div>
@@ -68,4 +68,14 @@ const StartUpCard = ({ post }: { post: StartUpTypeCard }) => {
   );
 };
 
-export default StartUpCard;
+export const StartupCardSkeleton = () => (
+  <>
+    {[0, 1, 2, 3, 4].map((index: number) => (
+      <li key={cn("skeleton", index)}>
+        <Skeleton className="startup-card_skeleton" />
+      </li>
+    ))}
+  </>
+);
+
+export default StartupCard;
