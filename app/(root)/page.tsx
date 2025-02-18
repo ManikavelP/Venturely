@@ -32,7 +32,7 @@ export default async function Home({
   return (
     <>
       <section
-        className="pink_container
+        className="pink_container !min-h-[230px]
       "
       >
         <h1 className="heading">
