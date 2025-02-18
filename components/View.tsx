@@ -2,15 +2,23 @@ import React from "react";
 import Ping from "./Ping";
 import { client } from "@/sanity/lib/client";
 import { startup_views_query } from "@/sanity/lib/queries";
+import { writeClient } from "@/sanity/lib/write-client";
+import { after } from "next/server";
 
-const View = async ({ id }) => {
+
+const View = async ({ id }: { id: string }) => {
   // Fetch the views data from Sanity
-  const data = await client
+  const { views: totalViews } = await client
     .withConfig({ useCdn: false })
     .fetch(startup_views_query, { id });
 
-  // Extract views or set default to 0
-  const totalViews = data?.views ?? 0;
+  after(
+    async () =>
+      await writeClient
+        .patch(id)
+        .set({ views: totalViews + 1 })
+        .commit()
+  );
 
   return (
     <div className="view-container">
